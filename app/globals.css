@@ -1,26 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root{
+  --primary:#213555
+}
+html, body {
+    margin: 0;
+  padding: 0;
+  height: 100% !important;
+  overflow-x: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*{
+  font-family:"Montserrat", sans-serif !important;
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.input{
+  height: 45px;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding-left: 20px;
+}
+.input:focus{
+  border:1px  solid #242020;
+  outline: none;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+button{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 40px !important;
+  font-weight: 500;
+  width: 100%;
+  box-shadow: none !important;
+}
+
+label{
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #353535;
+}
+
+a{
+  text-decoration: none;
+  color: var(--primary) !important
 }
