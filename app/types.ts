@@ -1,11 +1,11 @@
 
 
-interface LoginInfo{
+export interface LoginInfo{
     userType:UserType
     email:string
     password:string
 }
-interface RegisterInfo{
+export interface RegisterInfo{
     userType:UserType
     name:string
     email:string

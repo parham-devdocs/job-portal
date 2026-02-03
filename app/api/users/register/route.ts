@@ -1,6 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { DbConfig } from "../../dbConfig";
+import User from "../../../../models/userModel";
+import { RegisterInfo} from "../../../types";
+DbConfig()
+export async function POST(request:NextRequest) {
 
-
-async function POST(request:NextRequest) {
-    return NextResponse.json({message:"user/register a[i accessed wth post method"})
+    try {
+        const body:RegisterInfo=await request.json()
+        const user=await User.findOne({email:body.email})
+        if (user) {
+            throw new Error("user already exists")
+        }
+        
+    } catch (error:any) {
+        return Response.json({message:error.message},{status:500})
+    }
 }
