@@ -1,13 +1,21 @@
 "use client"
 
-import { Button, Form, Radio } from 'antd'
+import { Button, Form, message, Radio } from 'antd'
+import axios from 'axios'
 import Link from 'next/link'
 import { useState } from 'react'
+import { RegisterInfo,UserType } from '../types'
 
 const Register = () => {
   const [userType,setUserType]=useState<UserType>("employee")
-  function onFinish(values:RegisterInfo) {
-    console.log(values)
+  async function onFinish(values:RegisterInfo) {
+    try {
+      const response=await axios.post("/api/users/register",values)
+      message.success(response.data.message)
+    } catch (error:any) {
+      message.error(error.response.data.message || "somnething went wrong")
+    }
+ 
   }
   function onChangeUserType(value:UserType) {
     setUserType(value)

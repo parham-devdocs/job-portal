@@ -1,23 +1,21 @@
 "use client";
 
-import { Button, Form, Radio } from 'antd';
+import { Button, Form, message, Radio } from 'antd';
+import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
+import { LoginInfo, UserType } from '../types';
 
-// Make sure these types are defined (usually in a shared types file)
-type UserType = 'employee' | 'employer';
-
-interface LoginInfo {
-  userType: UserType;
-  email: string;
-  password: string;
-}
-
-const Login = () => {
+const Register = () => { // 👈 Renamed to Register for clarity
   const [userType, setUserType] = useState<UserType>('employee');
 
-  function onFinish(values: LoginInfo) {
-    console.log(values);
+  async function onFinish(values: LoginInfo) {
+    try {
+      const response = await axios.post("/api/users/login", values);
+      message.success(response.data.message);
+    } catch (error: any) {
+      message.error(error.response?.data?.message || "Something went wrong");
+    }
   }
 
   function onChangeUserType(value: UserType) {
@@ -27,7 +25,7 @@ const Login = () => {
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
       <div className="card p-5 w-[400px] bg-white">
-        <h1 className="text-xl">Portal Jobd - Login</h1>
+        <h1 className="text-xl">Portal Job - Login</h1> {/* Updated title */}
         <hr />
         <Form
           layout="vertical"
@@ -35,9 +33,8 @@ const Login = () => {
           onFinish={onFinish}
           initialValues={{ userType: 'employee' }}
         >
-          <Form.Item label="Login As" name="userType">
+          <Form.Item label="login As" name="userType">
             <Radio.Group
-            defaultValue={userType}
               value={userType}
               onChange={(e) => onChangeUserType(e.target.value as UserType)}
             >
@@ -47,27 +44,27 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item
-            label={userType === 'employee' ? 'User Email' : 'Company Official Email'}
+            label={userType === 'employee' ? 'Email' : 'Company Official Email'}
             name="email"
-            rules={[{ required: true, message: `Please enter your ${userType==="employee"?"email":" company email"} !` }]}
-            >
+            rules={[{ required: true, message: `Please enter your ${userType === 'employee' ? 'email' : 'company email'}!` }]}
+          >
             <input type="email" className="input w-full" />
           </Form.Item>
 
           <Form.Item
-            label={userType === 'employee' ? 'User Password' : 'Company Password'}
+            label={userType === 'employee' ? 'Password' : 'Company Password'}
             name="password"
-            rules={[{ required: true, message: `Please enter your ${userType==="employee"?"password":" company password"} !` }]}
-            >
+            rules={[{ required: true, message: `Please enter your ${userType === 'employee' ? 'password' : 'company password'}!` }]}
+          >
             <input type="password" className="input w-full" />
           </Form.Item>
 
           <p>
-            Don't have an account? <Link href="/register">Sign up now</Link>
+            Already have an account? <Link href="/login">Log in</Link>
           </p>
 
           <Button type="primary" htmlType="submit">
-            Login
+            Sign Up
           </Button>
         </Form>
       </div>
@@ -75,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

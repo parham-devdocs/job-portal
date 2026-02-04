@@ -11,4 +11,4 @@ export interface RegisterInfo{
     email:string
     password:string
 }
-type UserType = "employee" | "employer"
+export type UserType = "employee" | "employer"
