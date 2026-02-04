@@ -5,13 +5,16 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
 import { LoginInfo, UserType } from '../types';
+import { useRouter } from 'next/navigation';
 
 const Register = () => { // 👈 Renamed to Register for clarity
-  const [userType, setUserType] = useState<UserType>('employee');
+  const router=useRouter()
 
+  const [userType, setUserType] = useState<UserType>('employee');
   async function onFinish(values: LoginInfo) {
     try {
       const response = await axios.post("/api/users/login", values);
+router.push("/")
       message.success(response.data.message);
     } catch (error: any) {
       message.error(error.response?.data?.message || "Something went wrong");
@@ -64,7 +67,7 @@ const Register = () => { // 👈 Renamed to Register for clarity
           </p>
 
           <Button type="primary" htmlType="submit">
-            Sign Up
+          Login
           </Button>
         </Form>
       </div>
