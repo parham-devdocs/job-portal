@@ -3,12 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
     try {
-        const isPublicPage = 
-            request.nextUrl.pathname === "/login" || 
-            request.nextUrl.pathname === "/register" || 
-            request.nextUrl.pathname === "/";
+        const isPublicPage =   request.nextUrl.pathname === "/login" ||   request.nextUrl.pathname === "/register" 
+                const token = request.cookies.get("token")?.value
 
-        const token = request.cookies.get("token")?.value;
 
         // If no token AND trying to access protected page → redirect to login
         if (!token && !isPublicPage) {
@@ -16,6 +13,9 @@ export async function middleware(request: NextRequest) {
         }
 
     
+        if (token && isPublicPage) {
+            return NextResponse.redirect(new URL("/", request.url));
+        }
 
         return NextResponse.next();
     } catch (error) {
@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
     }
 }
 
-// Run middleware on all routes except static files and API
 export const config = {
     matcher: [
   "/",

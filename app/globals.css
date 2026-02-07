@@ -1,48 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-:root{
-  --primary:#213555
-}
-html, body {
-    margin: 0;
-  padding: 0;
-  height: 100% !important;
-  overflow-x: hidden;
+:root {
+  --primary: #213555;
 }
 
-*{
-  font-family:"Montserrat", sans-serif !important;
-
+.layout-parent {
+  @apply flex p-[10px] gap-[10px] h-screen;
 }
 
-.input{
-  height: 45px;
-  width: 100%;
-  border: 1px solid #ccc;
-  padding-left: 20px;
-}
-.input:focus{
-  border:1px  solid #242020;
-  outline: none;
-}
-
-button{
-  border: none;
-  outline: none;
-  cursor: pointer;
-  height: 40px !important;
-  font-weight: 500;
-  width: 100%;
-  box-shadow: none !important;
-}
-
-label{
-  margin: 0 !important;
-  padding: 0 !important;
-  color: #353535;
-}
-
-a{
-  text-decoration: none;
-  color: var(--primary) !important
-}
