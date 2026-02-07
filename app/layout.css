@@ -1,35 +1,70 @@
-@reference "./globals.css"; /* 👈 This is now REQUIRED in v4 */
+@reference "./globals.css";
 
-:root{
-    --primary:#213555
+:root {
+  --primary: #213555;
 }
-.layout-parent{
-    @apply flex p-[10px] gap-[10px] h-screen
+
+.layout-parent {
+  @apply flex p-[10px] gap-[10px] h-screen;
 }
+
 .sidebar {
-    background-color: var(--primary);
-    @apply flex flex-col justify-between h-full rounded-[4px] py-[5px] px-[20px];
-  }
-  
-  .sidebar-footer {
-    @apply flex items-center justify-between;
-  }
-  
-  .menu-items {
-    @apply flex flex-col gap-[25px];
-  }
-  
-  .menu-item {
-    @apply flex py-[10px] gap-[10px] items-center cursor-pointer rounded-[5px] text-white
-  }
-  .active-menu-item{
-    color: var(--primary);
-    @apply bg-white 
-  }
-  .menu-item i {
-    @apply text-[18px];
-  }
-  
-  .menu-item span {
-    @apply text-[14px];
-  }
+  background-color: var(--primary);
+  @apply flex flex-col justify-between h-full rounded-[8px] py-[20px] px-[15px];
+}
+
+/* Logo Section */
+.logo {
+  @apply flex justify-center items-center w-full mb-[30px] gap-[10px]
+}
+
+.logo h1 {
+  @apply font-bold text-xl text-white;
+}
+
+.logo i {
+  @apply w-8 h-8 rounded-full border-2 border-white flex justify-center items-center cursor-pointer text-white text-[18px];
+}
+
+/* Menu Items */
+.menu-items {
+  @apply flex flex-col gap-[10px] w-full;
+}
+
+.menu-item {
+  @apply flex items-center gap-[12px] px-[12px] py-[10px] rounded-lg cursor-pointer text-white hover:bg-white/10 transition-all;
+}
+
+.active-menu-item {
+  @apply bg-white text-[var(--primary)];
+}
+
+.menu-item i {
+  @apply text-[18px] min-w-[24px];
+}
+
+.menu-item span {
+  @apply text-[14px] font-medium;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  @apply flex flex-col items-center gap-[15px] w-full pt-[15px] mt-auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+  @apply flex flex-col items-center gap-[5px] p-[10px] bg-white/10 rounded-lg w-full;
+}
+
+.user-info span:first-child {
+  @apply text-white font-semibold text-[13px];
+}
+
+.user-info span:last-child {
+  @apply text-gray-300 text-[11px];
+}
+
+.sidebar-footer button {
+  @apply flex items-center gap-[10px] px-[12px] py-[8px] rounded-lg bg-transparent border border-white/20  hover:text-black  transition-all w-full;
+}
