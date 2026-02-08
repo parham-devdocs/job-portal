@@ -2,9 +2,13 @@
 "use client";
 
 import { ConfigProvider } from 'antd';
+import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import Sidebar from '../components/sidebar';
 
 const AntdConfigLayout = ({ children }: { children: ReactNode }) => {
+  const pathname=usePathname()
+
   return (
     <ConfigProvider
       theme={{
@@ -13,7 +17,9 @@ const AntdConfigLayout = ({ children }: { children: ReactNode }) => {
         },
       }}
     >
-      {children}
+{pathname === "/login" || pathname==="/register" ?
+ <div>{children}</div>
+ :<div className=' layout-parent'><Sidebar/><div className="body">{children}</div></div>}
     </ConfigProvider>
   );
 };
