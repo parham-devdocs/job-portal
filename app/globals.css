@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+@layer base {
+  :root {
+    --color-primary: #213555;
+  }
+  .dark {
+    --color-primary: 96 165 250; /* blue-400 for dark mode */
+  }
+}
 :root {
   --primary: #213555;
 }

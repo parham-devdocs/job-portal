@@ -14,7 +14,6 @@ const Sidebar = ({userInfo}:any) => {
       ]
   return (
 <div className='sidebar'>
-  {/* Logo Section */}
   <div className="logo">
     {isSidebarShown && <h1>Job Portal</h1>}
     <i 
