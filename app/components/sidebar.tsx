@@ -3,7 +3,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
-const Sidebar = () => {
+const Sidebar = ({userInfo}:any) => {
   const [isSidebarShown,setIsSidebarShown]=useState(true)
   const pathname=usePathname()
     const menuItems=[{name:"Home",path:'/',icon:'ri-home-7-line'},
@@ -44,8 +44,8 @@ const Sidebar = () => {
   <div className="sidebar-footer">
     {isSidebarShown && (
       <div className="user-info">
-        <span>username</span>
-        <span>email@gmail.com</span>
+        <span>{userInfo?.name}</span>
+        <span>{userInfo?.email}</span>
       </div>
     )}
     <Button>
