@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./layout.css";
 import "./antdOverride.css";
-import "./commonClasses.css";
 import AntdConfigLayout from "./layouts/antdConfigLayout";
 import 'antd/dist/reset.css'; 
 import ReduxProvider from "./providers/reduxProvider";

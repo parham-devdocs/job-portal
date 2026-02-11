@@ -24,7 +24,7 @@
 @layer components {
   input,
   textarea {
-    @apply min-h-[45px] w-full border border-gray-300 pl-[5px] rounded-sm;
+    @apply min-h-[45px] w-full border border-gray-300 pl-[5px] rounded-sm bg-slate-600;
   }
   
   /* Optional: Add focus styles */
