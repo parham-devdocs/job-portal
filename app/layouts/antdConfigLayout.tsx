@@ -7,11 +7,15 @@ import Sidebar from '../components/sidebar';
 import { getCurrentUser } from '../services/clientSide/getUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser, userSlice } from '../redux/userSlice';
+import { logout } from '../services/clientSide/logout';
+import { setLoading } from '../redux/loader';
+import { useRouter } from 'next/navigation';
 
 const AntdConfigLayout = ({ children }: { children: ReactNode }) => {
   const pathname=usePathname()
   const dispatch=useDispatch()
   const currentUser = useSelector((state: any) => state.user.currentUser);
+  const router=useRouter()
 async function getUser() {
   try {
     const response=await getCurrentUser()
@@ -20,8 +24,27 @@ async function getUser() {
     message.error("user info can not be accessed at the moment")
   }
 }
+async function logoutHandler() {
+  try {
+    dispatch(setLoading(true));
+    await logout(); 
+    dispatch(setCurrentUser(null));
+
+    router.push('/login');
+    message.success("user logged out successfuly")
+  } catch (error) {
+    console.log("Something went wrong");
+    message.error("logout failed")
+
+  } finally {
+    dispatch(setLoading(false));
+  }
+}
   useEffect(()=>{
-    getUser()
+    if (pathname!=="/login" && pathname !=="/register" && !currentUser) {
+      getUser()
+
+    }
   },[pathname])
 
   return (
@@ -34,7 +57,7 @@ async function getUser() {
     >
 {pathname === "/login" || pathname==="/register" ?
  <div>{children}</div>
- :<div className=' layout-parent'><Sidebar userInfo={currentUser} /><div className="body">{children}</div></div>}
+ :<div className='layout-parent'><Sidebar userInfo={currentUser} logoutHandler={logoutHandler} /><div className="body">{children}</div></div>}
     </ConfigProvider>
   );
 };

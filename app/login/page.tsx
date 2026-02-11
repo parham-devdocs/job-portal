@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { LoginInfo, UserType } from '../types';
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import Loader from '../components/loader';
 
-const Register = () => { // 👈 Renamed to Register for clarity
+const Register = () => {
   const router=useRouter()
-
   const [userType, setUserType] = useState<UserType>('employee');
   async function onFinish(values: LoginInfo) {
     try {
@@ -66,8 +67,8 @@ router.push("/")
             Already have an account? <Link href="/login">Log in</Link>
           </p>
 
-          <Button type="primary" htmlType="submit">
-          Login
+          <Button type="primary" htmlType="submit" >
+            Sign In
           </Button>
         </Form>
       </div>

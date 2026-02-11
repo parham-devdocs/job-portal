@@ -1,22 +1,14 @@
-'use client'; // 👈 Add this at the top!
+'use client'; 
 
-import { Button, message } from "antd";
+import { Button} from "antd";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation"; // ✅ import useRouter
+import { usePathname, useRouter } from "next/navigation"; 
 import { useState } from "react";
 import Loader from "./loader";
-import { logout } from "../services/clientSide/logout";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../redux/userSlice";
-import { setLoading } from "../redux/loader";
-// ❌ Remove: redirect is not needed here
-// import { redirect } from "next/navigation"; ← DELETE THIS LINE
 
-const Sidebar = ({ userInfo }: any) => {
+const Sidebar = ({ userInfo,logoutHandler }: any) => {
   const [isSidebarShown, setIsSidebarShown] = useState(true);
   const pathname = usePathname();
-  const router = useRouter(); // ✅ Get client-side router
-  const dispatch = useDispatch();
 
   const menuItems = [
     { name: "Home", path: '/', icon: 'ri-home-7-line' },
@@ -26,23 +18,7 @@ const Sidebar = ({ userInfo }: any) => {
     { name: "Saved", path: '/saved', icon: 'ri-save-line' }
   ];
 
-  async function logoutHandler() {
-    try {
-      dispatch(setLoading(true));
-      await logout(); 
-      dispatch(setCurrentUser(null));
-
-      router.push('/login');
-      router.refresh(); 
-      message.success("user logged out successfuly")
-    } catch (error) {
-      console.log("Something went wrong");
-      message.error("logout failed")
-
-    } finally {
-      dispatch(setLoading(false));
-    }
-  }
+ 
 
   return (
     <div className='sidebar'>

@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DbConfig } from "../../dbConfig";
-import User from "../../../../models/userModel";
-import { RegisterInfo} from "../../../types";
-import bcrypt from "bcryptjs";
-DbConfig()
+import {connectDB}  from "../../dbConfig";
+
+
+connectDB()
 export async function POST(request:NextRequest) {
 
     try {

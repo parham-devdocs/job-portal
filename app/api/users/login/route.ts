@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DbConfig } from "../../dbConfig";
+import { connectDB}from "../../dbConfig";
 import User from "../../../../models/userModel";
 import { RegisterInfo} from "../../../types";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-DbConfig()
+connectDB()
 export async function POST(request:NextRequest) {
 
     try {

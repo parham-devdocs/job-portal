@@ -1,18 +1,44 @@
-import mongoose from "mongoose";
+// lib/db.ts
+import mongoose from 'mongoose';
 
+const MONGODB_URI = process.env.MONGOOSE_CONNECTION_URI!;
 
-export function DbConfig() {
-    try {
-        mongoose.connect(process.env.MONGOOSE_CONNECTION_URI!)
-        const connection=mongoose.connections
-        connection[0].on("connected",()=>{
-            console.log("mongo db connected ")
-        })
-        connection[0].on("error",()=>{
-            console.log("mongo db error ")
-        })
-    } catch (error) {
-        
-console.log(error)
-    }
+if (!MONGODB_URI) {
+  throw new Error('Please define the MONGODB_URI environment variable');
+}
+
+interface MongooseCache {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+}
+
+declare global {
+  // eslint-disable-next-line no-var
+  var mongoose: MongooseCache | undefined;
+}
+
+let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+
+export async function connectDB() {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
+  }
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
+  global.mongoose = cached;
+  return cached.conn;
 }
