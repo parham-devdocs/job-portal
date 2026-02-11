@@ -5,8 +5,8 @@ const { TextArea } = Input;
 
 const EmployeeForm = () => {
   return (
-      <Row gutter={[24, 24]} className="w-full">
-        <Col span={8} className="w-full">
+      <Row gutter={[16, 16]} className="w-full">
+        <Col  xs={24} md={16} xl={8}  className="w-full">
           <Form.Item 
             name="firstName" 
             rules={[{ required: true, message: "First name is required" }]}
@@ -14,7 +14,7 @@ const EmployeeForm = () => {
             <Input placeholder="Enter first name" />
           </Form.Item>
         </Col>
-        <Col span={8} className="w-full">
+        <Col  xs={24} md={16} xl={8} className="w-full">
           <Form.Item 
             name="email" 
             rules={[
@@ -25,7 +25,7 @@ const EmployeeForm = () => {
             <Input placeholder="Enter email" />
           </Form.Item>
         </Col>
-        <Col span={8} className="w-full">
+        <Col  xs={24} md={16} xl={8} className="w-full">
           <Form.Item 
             name="phoneNumber" 
             rules={[{ required: true, message: "Phone number is required" }]}
