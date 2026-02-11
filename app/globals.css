@@ -1,10 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #213555;
+  }
+  .dark {
+    --color-primary: 96 165 250; /* blue-400 for dark mode */
+  }
+}
+@theme {
+  --color-primary:#213555 ;
+}
 :root {
   --primary: #213555;
 }
 
 .layout-parent {
-  @apply flex p-[10px] gap-[10px] h-screen;
+  @apply flex p-[10px] gap-[10px] h-screen w-full;
 }
 
+
+@layer components {
+  input,
+  textarea {
+    @apply min-h-[45px] w-full border border-gray-300 pl-[5px] rounded-sm bg-slate-600;
+  }
+  
+  /* Optional: Add focus styles */
+  input:focus,
+  textarea:focus {
+    @apply outline-none ring-2 ring-blue-500 border-transparent;
+  }
+}

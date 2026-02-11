@@ -6,7 +6,6 @@ export async function middleware(request: NextRequest) {
         const isPublicPage =   request.nextUrl.pathname === "/login" ||   request.nextUrl.pathname === "/register" 
                 const token = request.cookies.get("token")?.value
 
-
         // If no token AND trying to access protected page → redirect to login
         if (!token && !isPublicPage) {
             return NextResponse.redirect(new URL("/login", request.url));

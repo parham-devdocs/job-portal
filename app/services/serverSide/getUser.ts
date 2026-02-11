@@ -1,9 +1,8 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 
-export async function getUser() {
+export async function getCurrentUser() {
     try {
-      // ✅ Get the TOKEN STRING, not the cookie object
       const tokenCookie = (await cookies()).get("token");
       const token = tokenCookie?.value; // ← THIS IS THE KEY FIX
   
@@ -24,3 +23,5 @@ export async function getUser() {
       return null;
     }
   }
+
+ 

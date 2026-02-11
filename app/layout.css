@@ -5,9 +5,14 @@
 }
 
 .layout-parent {
-  @apply flex p-[10px] gap-[10px] h-screen;
+  @apply flex p-[10px] gap-[10px] h-screen w-full 
 }
-
+.body{
+  width: 100%;
+}
+form{
+  width: 100%;
+}
 .sidebar {
   background-color: var(--primary);
   @apply flex flex-col justify-between h-full rounded-[8px] py-[20px] px-[15px];
