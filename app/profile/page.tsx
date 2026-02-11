@@ -1,5 +1,5 @@
 "use client"
-import { Col, Form, Row } from "antd";
+import { Button, Col, Form, Row } from "antd";
 import { useSelector } from "react-redux"
 import { EmployerForm } from "../components/employerForm";
 import EmployeeForm from "../components/employeeForm";
@@ -15,11 +15,15 @@ const page = () => {
 <Row justify="start" style={{ minHeight: '100vh', width: '100%' }}>
         
         <Col   md={24}  >
-          <Form className=" p-6 rounded-lg">
+          <Form className=" p-6 rounded-lg" onFinish={(e)=>console.log(e)}>
             {currentUser?.userType === "employer" ? <EmployerForm /> : <EmployeeForm />}
+            <Button type="primary" htmlType="submit">
+        Submit
+      </Button>
           </Form>
         </Col>
       </Row>
+      
 </Row>
      
   )
