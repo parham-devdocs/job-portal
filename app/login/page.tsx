@@ -64,7 +64,7 @@ router.push("/")
           </Form.Item>
 
           <p>
-            Already have an account? <Link href="/login">Log in</Link>
+            Dont have an account? <Link href="/register">Sign up</Link>
           </p>
 
           <Button type="primary" htmlType="submit" >

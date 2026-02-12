@@ -5,11 +5,11 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useState } from 'react'
 import { RegisterInfo,UserType } from '../types'
-
 const Register = () => {
   const [userType,setUserType]=useState<UserType>("employee")
   async function onFinish(values:RegisterInfo) {
     try {
+      console.log(values)
       const response=await axios.post("/api/users/register",values)
       message.success(response.data.message)
     } catch (error:any) {
@@ -22,13 +22,13 @@ const Register = () => {
     console.log(value)
   }
   return (
-    <div className=' flex justify-center h-screen  items-center bg-primary'>
-      <div className=' card p-5 w-400 bg-white'>
+    <div className=' flex justify-center h-screen   items-center bg-primary'>
+      <div className=' rounded-2xl p-5 w-[400px] bg-white'>
         <h1 className=' text-xl'>Portal Jobd - Register</h1>
         <hr />
-        <Form layout="vertical" className=' flex flex-col gap-3' onFinish={onFinish}>
+        <Form layout="vertical" className=' flex flex-col gap-3' onFinish={onFinish} initialValues={{userType:"employee"}}>
         <Form.Item label="Register As" name="userType">
-<Radio.Group defaultValue={userType} value={userType} onChange={(e)=> onChangeUserType(e.target.value as UserType)}>
+<Radio.Group  defaultValue={userType} value={userType} onChange={(e)=> onChangeUserType(e.target.value as UserType)}>
   <Radio value={"employer"}>Employer</Radio>
   <Radio value={"employee"}>Employee</Radio>
 
@@ -54,7 +54,7 @@ const Register = () => {
 
           </Form.Item>
           <p > have an account? <Link href="/login" >login now</Link></p>
-          <Button type='primary' htmlType="submit">Login</Button>
+          <Button type='primary' htmlType="submit">Register</Button>
         </Form>
       </div>
         </div>

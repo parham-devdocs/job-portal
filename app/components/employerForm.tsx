@@ -1,9 +1,50 @@
-
-
-import React from 'react'
+import { Col, Form, Row, Input, Space, Button } from 'antd'
+import TextArea from 'antd/es/input/TextArea'
 
 export const EmployerForm = () => {
   return (
-    <div className=' w-full'>EmployerForm</div>
+    <Row gutter={[16, 16]} className="w-full">
+    <Col  xs={24} md={16} xl={8}  className="w-full">
+      <Form.Item 
+        name="firstName" 
+        rules={[{ required: true, message: "First name is required" }]}
+      >
+        <Input placeholder="Enter first name" />
+      </Form.Item>
+    </Col>
+    <Col  xs={24} md={16} xl={8} className="w-full">
+      <Form.Item 
+        name="email" 
+        rules={[
+          { required: true, message: "Email is required" },
+          { type: 'email', message: "Please enter a valid email" }
+        ]}
+      >
+        <Input placeholder="Enter email" />
+      </Form.Item>
+    </Col>
+    <Col  xs={24} md={16} xl={8} className="w-full">
+      <Form.Item 
+        name="phoneNumber" 
+        rules={[{ required: true, message: "Phone number is required" }]}
+      >
+        <Input placeholder="Enter phone number" />
+      </Form.Item>
+    </Col>
+    <Col span={24} className="w-full">
+      <Form.Item  name="carrierObject">
+        <TextArea rows={4} placeholder="Enter carrier object details" />
+      </Form.Item>
+    </Col>
+    
+{/* {dynamicSections.map(section=>{
+return         <DynamicFieldList name={section.name}  addButtonLabel={section.addButtonLabel} fields={section.fields}  />
+
+})} */}
+
+ 
+
+  
+  </Row>
   )
 }
