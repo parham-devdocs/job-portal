@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DbConfig } from "../../dbConfig";
+import { connectDB} from "../../dbConfig";
 import User from "../../../../models/userModel";
 import { RegisterInfo} from "../../../types";
 import bcrypt from "bcryptjs";
-DbConfig()
+connectDB()
 export async function POST(request:NextRequest) {
 
     try {
         const body:RegisterInfo=await request.json()
+        console.log(body)
         const user=await User.findOne({email:body.email})
         if (user) {
             throw new Error("user already exists")
